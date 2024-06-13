@@ -1,11 +1,12 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> | 
-    <router-link to="/customer">Customer</router-link> | 
-    <router-link to="/insertcustomer">고객등록</router-link>
-  </nav>
-  <router-view/>
+  <div class="container">
+    <nav >
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> | 
+      <router-link to="/customer">Customer</router-link>
+    </nav>
+    <router-view/>
+  </div>
 </template>
 
 <style>

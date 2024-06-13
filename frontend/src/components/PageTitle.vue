@@ -1,6 +1,7 @@
 <template>
     <h1>{{ title }}</h1>
     <h1>{{ menuNo }}</h1>
+    <h1>{{ this.$store.state.count }}</h1>
     <h1></h1>
 </template>
 <script>
