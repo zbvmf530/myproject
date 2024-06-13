@@ -17,8 +17,8 @@
     <ProvideInjectChild></ProvideInjectChild>
     <hr>
     <p v-text="'count : '+count"></p>
-    <button @click="increment">증가</button>
-    <button @click="decrement">감소</button>
+    <!-- <button @click="increment">증가</button> -->
+    <!-- <button @click="decrement">감소</button> -->
     <!-- <FooterTitle>카피라이트</FooterTitle> -->
 
   </div>
@@ -51,20 +51,20 @@ export default {
     sendMessage(msg){
       //console.log(msg);
     },
-    increment(){
-      this.$store.commit('increment');
-    },
-    decrement(){
-      this.$store.commit('decrement');
-    }
+    // increment(){
+    //   this.$store.commit('increment');
+    // },
+    // decrement(){
+    //   this.$store.commit('decrement');
+    // }
   },
   created(){
     
   },
   computed:{
-    count(){
-      return this.$store.state.count;
-    }
+    // count(){
+    //   return this.$store.state.count;
+    // }
   },
   mounted(){
     

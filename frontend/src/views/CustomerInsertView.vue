@@ -33,7 +33,9 @@ export default {
     props:{
         customer : {
             type: Object
-        }
+        },
+        page:{type:Object},
+        perPage:{type:Number}
     },
     data(){ return { Customerdata : {...this.customer} }; },
     created() {console.log(this.Customerdata)},
@@ -58,7 +60,7 @@ export default {
             {
                 alert("등록완료!");
                 this.Customerdata = {};
-                this.$parent.goPage(1,2);
+                this.$parent.goPage(1,this.perPage);
             }
         },
         async updateCustomer(){
@@ -72,11 +74,9 @@ export default {
             {
                 alert("수정완료!");
                 this.Customerdata = {};
-                this.$parent.goPage(1,2);
+                this.$parent.goPage(this.page.currentPage,this.perPage);
             }
-        }
-        
-        
+        } 
     }
     }
 </script>

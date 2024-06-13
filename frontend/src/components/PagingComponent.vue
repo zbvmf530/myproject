@@ -1,12 +1,13 @@
 <template>
     <nav aria-label="Page navigation example">
-  <ul class="pagination">
+  <ul class="pagination justify-content-center">
     <li class="page-item" v-show="laquoCheck">
       <a class="page-link" href="#" aria-label="Previous" @click.prevent="goPrevious()">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li class="page-item" v-for="(page,idx) in pageArr"><a class="page-link" href="#" @click.prevent="clickedPage(page)">{{ page }}</a></li>
+    <li class="page-item" v-for="(page,idx) in pageArr">
+        <a class="page-link " :class="{active: activePage==page}" href="#" @click.prevent="clickedPage(page)">{{ page }}</a></li>
     
     <li class="page-item" v-show="raquoCheck">
         <a class="page-link" href="#" aria-label="Next" @click.prevent="goNext()">
@@ -17,9 +18,10 @@
 </nav>
 </template>
 <script>
+
 let pages = [];
 export default {
-    data(){ return {}; },
+    data(){ return { activePage : '', raquoCheck:false,laquoCheck:false}; },
     computed:{
          pageArr(){
              pages = [];
@@ -29,15 +31,19 @@ export default {
             }
             return pages;
         },
+        
         laquoCheck(){
-            return this.page.currentPage * this.page.startIdx-1 > this.page.firstPage; 
+            return this.activePage > 5; 
         },
         raquoCheck(){
-            return this.page.currentPage*this.page.endIdx+1 < this.page.lastPage; 
-        }
+            return this.page.endIdx<this.page.lastPage; 
+        }   
     },
-    watch(){
-        
+    watch:{
+        page(){
+            this.activePage = this.page.currentPage;
+            console.log('활성화된 페이지넘버 : '+ this.activePage);
+        }
     },
     created() {
 
@@ -57,16 +63,18 @@ export default {
             this.$emit('go-page',pageNo,this.perPage);
         },
         goPrevious() {
-            if (this.page.currentPage * this.page.startIdx-1 > this.page.firstPage) {
+            let reCalc = (this.activePage/5);
+            if (reCalc > this.page.firstPage) {
                 console.log("goPrev호출");
-            this.$emit('go-page', this.page.currentPage * this.page.startIdx - 1),this.perPage;
+            this.$emit('go-page', Math.floor(reCalc),this.perPage);
             }
         },
         goNext() {
-            if (this.page.currentPage*this.page.endIdx+1 < this.page.lastPage) {
+            let reCalc = Number(5-this.activePage+this.activePage)+1;
+            if (reCalc <= this.page.lastPage) {
                 console.log("gonext호출");
 
-            this.$emit('go-page', this.page.currentPage*this.page.endIdx + 1,this.perPage);
+            this.$emit('go-page', reCalc,this.perPage);
             }
         }
     }

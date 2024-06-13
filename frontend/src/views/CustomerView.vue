@@ -2,7 +2,7 @@
     <div>고객관리</div>
     
     <div class="row">
-        <div class="col-md-12 col-lg-7 border p-3">
+        <div class="col-md-12 col-lg-6 border p-3">
             <select v-model="perPage" @change="changeUnitCount()">
         <option v-for="perPage in perPageList" :key="perPage.id" :value="perPage.value">{{ perPage.value }}</option>
     </select>
@@ -16,23 +16,25 @@
                 <th>email</th>
                 <th>phone</th>
                 <th>address</th>
+                <th>delete</th>
             </tr>
         </thead>
 
         <tbody>
-            <tr v-for="cust in customerList" @click="getCustomer(cust)">
+            <tr v-for="(cust, idx) in customerList" @click="getCustomer(cust)">
                 <td v-text="cust.id"></td>
                 <td v-text="cust.name"></td>
                 <td v-text="cust.email"></td>
                 <td v-text="cust.phone"></td>
                 <td v-text="cust.address"></td>
+                <td><button class="btn btn-danger" @click.stop="deleteCustomer(cust)">삭제</button></td>
             </tr>
         </tbody>
     </table>
     <Paging :page :perPage @go-page="goPage"></Paging>
         </div>
-    <div class="col-md-12 col-lg-7 border  p-3">
-        <CustomerInsert :customer="this.customer"></CustomerInsert>
+    <div class="col-md-12 col-lg-6 border  p-3">
+        <CustomerInsert :page :perPage :customer="this.customer"></CustomerInsert>
     </div>
     </div>
 
@@ -90,7 +92,8 @@ export default {
             let result = await axios.get('/api/customer?pageUnit='+`${pageUnit}&page=${page}`);
             this.customerList = result.data.customerList;
             this.customerCount = result.data.count;
-            this.page = this.pageCalc(page,this.customerCount,5,pageUnit)
+            this.page = this.pageCalc(page,this.customerCount,5,pageUnit);
+
         },
         changeUnitCount(){
             //console.log(event.target.value);
@@ -99,6 +102,13 @@ export default {
         getCustomer(cust){
             this.customer = {...cust};
             console.log(this.customer);
+        },
+        async deleteCustomer(cust){
+            let isDeleted = await axios.delete(`/api/customer/${cust.id}`);
+            if(isDeleted.statusText == 'OK'){
+                alert('삭제완료!');
+                this.goPage(1,this.perPage);
+            }
         }
     }
 }
