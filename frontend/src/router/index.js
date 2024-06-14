@@ -24,7 +24,28 @@ const routes = [
     path: '/insertcustomer',
     name: 'insertcustomer',
     component: () => import(/* webpackChunkName: "about" */ '../views/CustomerInsertView.vue')
+  },
+  {
+    path: '/loginForm',
+    name: 'loginForm',
+    component: () => import(/* webpackChunkName: "about" */ '../views/LoginForm.vue')
+  },
+  {
+    path: '/board',
+    name: 'board',
+    component: () => import(/* webpackChunkName: "about" */ '../views/BoardView.vue')
+  },
+  {
+    path: '/updateBoardForm',
+    name: 'updateBoardForm',
+    component: () => import(/* webpackChunkName: "about" */ '../views/UpdateBoardForm.vue')
+  },
+  {
+    path: '/addBoardForm',
+    name: 'addBoardForm',
+    component: () => import(/* webpackChunkName: "about" */ '../views/InsertBoardForm.vue')
   }
+  
 ]
 
 const router = createRouter({
