@@ -63,14 +63,15 @@ export default {
             this.$emit('go-page',pageNo,this.perPage);
         },
         goPrevious() {
-            let reCalc = (this.activePage/5);
+            console.log(this.page.startIdx);
+            let reCalc = (this.page.startIdx-1);
             if (reCalc > this.page.firstPage) {
                 console.log("goPrev호출");
             this.$emit('go-page', Math.floor(reCalc),this.perPage);
             }
         },
         goNext() {
-            let reCalc = Number(5-this.activePage+this.activePage)+1;
+            let reCalc = Number(this.page.endIdx-this.activePage+this.activePage)+1;
             if (reCalc <= this.page.lastPage) {
                 console.log("gonext호출");
 
