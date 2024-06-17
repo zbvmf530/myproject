@@ -44,6 +44,21 @@ const routes = [
     path: '/addBoardForm',
     name: 'addBoardForm',
     component: () => import(/* webpackChunkName: "about" */ '../views/InsertBoardForm.vue')
+  },
+  {
+    path: '/vuetify',
+    name: 'vuetify',
+    component: () => import(/* webpackChunkName: "about" */ '../views/VuetifyView.vue')
+  },
+    {
+    path: '/composition',
+    name: 'composition',
+    component: () => import(/* webpackChunkName: "about" */ '../components/CompositionDataBinding.vue')
+  },
+  {
+    path: '/compositionMouse',
+    name: 'compositionMouse',
+    component: () => import(/* webpackChunkName: "about" */ '../views/CompositionMouseView.vue')
   }
   
 ]

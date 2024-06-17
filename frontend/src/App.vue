@@ -5,7 +5,10 @@
       <router-link to="/about">About</router-link> | 
       <router-link to="/customer">Customer</router-link> | 
       <router-link to="/board">Boards</router-link> | 
-      <router-link to="/loginForm">Login</router-link>
+      <router-link to="/loginForm">Login</router-link> | 
+      <router-link to="/vuetify">Vuetify</router-link> | 
+      <router-link to="/composition">composition</router-link> | 
+      <router-link to="/compositionMouse">mouseExam</router-link> | 
     </nav>
     <router-view/>
   </div>
