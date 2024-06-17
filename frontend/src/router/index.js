@@ -36,7 +36,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/BoardView.vue')
   },
   {
-    path: '/updateBoardForm',
+    path: '/updateBoardForm/:no',
     name: 'updateBoardForm',
     component: () => import(/* webpackChunkName: "about" */ '../views/UpdateBoardForm.vue')
   },

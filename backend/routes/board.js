@@ -21,17 +21,17 @@ router.get("/",  async (req,res)=>{
     // res.send(boardList);
 });
 
- router.get("/file/:no", async (req,res)=>{
+ router.get("/:no", async (req,res)=>{
     let board = await mysql.query("getBoard",req.params.no)
                             .then(result=>result);
     // board.data.filename
     
-    const filepath = 'D:/upload/'+board.uploadfilename;  
-    const filename = board.filename;
-    res.setHeader('Content-Disposition', `attachment; filename=${filename}`); // 이게 핵심 
-    
-    res.send(board);
+    const filepath = 'D:/upload/'+board.uploadfilename; 
+    let filename = board.filename;
+    console.log(filename);
+    res.setHeader('Content-Disposition', `attachment; filename=${filename};`); // 이게 핵심 
     res.sendFile(filepath);
+    res.send(board);
 });
 
 

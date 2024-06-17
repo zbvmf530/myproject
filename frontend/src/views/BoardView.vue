@@ -26,7 +26,7 @@
                 <td v-text="brd.writer"></td>
                 <td ><img :src= "getImage(brd.uploadfilename)" @error="replaceImg" width="80px"></td>
                 <td v-text="brd.uploadfilename"></td>
-                <td><button class="btn btn-primary" @click="gotoUpdateForm(emp.employee_id)">수정</button></td>
+                <td><button class="btn btn-primary" @click="gotoUpdateForm(brd.no)">수정</button></td>
             </tr>
         </tbody>
     </table>
@@ -80,7 +80,7 @@ export default {
         replaceImg(e) {
                 e.target.src = require(`../assets/logo.png`);
         },
-        gotoUpdateForm(){this.$router.push('/updateBoardForm')},
+        gotoUpdateForm(brdNo){this.$router.push(`/updateBoardForm/${brdNo}`)},
         changeUnitCount(){
             //console.log(event.target.value);
             this.goPage(1,this.perPage);
