@@ -24,16 +24,22 @@ router.get("/",  async (req,res)=>{
  router.get("/:no", async (req,res)=>{
     let board = await mysql.query("getBoard",req.params.no)
                             .then(result=>result);
+    
+    test(board,res);
     // board.data.filename
     
-    const filepath = 'D:/upload/'+board.uploadfilename; 
-    let filename = board.filename;
-    console.log(filename);
-    res.setHeader('Content-Disposition', `attachment; filename=${filename};`); // 이게 핵심 
-    res.sendFile(filepath);
-    res.send(board);
+   
 });
-
+function test(brd,response){
+    console.log(brd);
+    
+    const filepath = 'D:/upload/'+brd[0].uploadfilename; 
+    const filename = brd[0].filename;
+    console.log(filename);
+    response.setHeader('Content-Disposition', `attachment; filename=\"${filename}\";`); // 이게 핵심 
+    response.type('png').sendFile(filepath);
+    response.send(brd);
+}
 
 router.post("/",upload.single('avatar'), (req,res)=>{
     // 첨부파일이 있으면

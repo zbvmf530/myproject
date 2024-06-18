@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-                <td ><img :src= "getImage(brd.filename)" @error="replaceImg" width="80px"></td>
+                <td ><img :src= "getImage(brd.uploadfilename)" @error="replaceImg" width="80px"></td>
         </tbody>
     </table>
         </div>
@@ -32,23 +32,23 @@ export default {
     data(){ return {brd:{}}; },
     created() {
         this.getBoard();
-        console.log("test");
-        console.log(this.brd);
+        //console.log("test");
+        //console.log(this.brd);
         //this.brd = result.data;
     },
     methods:{
         async getBoard(){
             const params = this.$route.params.no;
             result = await axios.get(url+`/${params}`).then(res=>res);
-            console.log(result)
+            console.log(result);
             this.brd = result.data[0];
             // const reader = new FileReader();
         },
         getImage(filNm){
  
-            console.log(filNm);
-            
-            return "d:/upload/"+filNm; 
+            //console.log(filNm);
+            return 'data:image/png;base64,'+ filNm;
+            //return "d:/upload/"+filNm; 
         },
         replaceImg(e) {
                 e.target.src = require(`../assets/logo.png`);
