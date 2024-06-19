@@ -3,6 +3,8 @@ const router = express.Router();
 const mysql = require('../mysql/index');
 const multer = require('multer');
 const upload = multer({ dest: 'd:/upload/' });
+const fs = require('fs');
+
 router.get("/",  async (req,res)=>{
     let page = !Number(req.query.page)?1:Number(req.query.page);   
     let pageUnit = !Number(req.query.pageUnit)?10:Number(req.query.pageUnit);
@@ -30,15 +32,22 @@ router.get("/",  async (req,res)=>{
     
    
 });
+
+
 function test(brd,response){
     console.log(brd);
     
-    const filepath = 'D:/upload/'+brd[0].uploadfilename; 
-    const filename = brd[0].filename;
-    console.log(filename);
-    response.setHeader('Content-Disposition', `attachment; filename=\"${filename}\";`); // 이게 핵심 
-    response.type('png').sendFile(filepath);
-    response.send(brd);
+    const filepath = 'd:/upload/'+brd[0].uploadfilename; 
+  
+
+    let readFile = fs.readFileSync(filepath); //이미지 파일 읽기
+
+    let encode = Buffer.from(readFile).toString('base64'); //파일 인코딩
+    
+    console.log('시작점');
+    //console.log(encode);
+
+    response.send([brd,encode]);
 }
 
 router.post("/",upload.single('avatar'), (req,res)=>{
